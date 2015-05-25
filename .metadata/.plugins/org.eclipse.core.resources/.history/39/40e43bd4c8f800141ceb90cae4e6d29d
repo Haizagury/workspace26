@@ -1,0 +1,16 @@
+package task;
+
+import view.CLI;
+
+public class MyTaskCli implements Task{
+
+	private CLI cli; 
+	
+	@Override
+	public void doTask() {
+
+		
+	}
+	
+	
+}

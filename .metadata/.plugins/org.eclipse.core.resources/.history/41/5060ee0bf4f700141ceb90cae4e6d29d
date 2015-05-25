@@ -1,0 +1,62 @@
+package view;
+
+import java.util.HashMap;
+import java.util.Observable;
+
+import model.Solution;
+import presenter.Presenter.Command;
+import task.Task;
+import algorithms.mazeGenerators.Maze;
+
+public class MyView extends Observable implements View,Runnable{
+
+	CLI cli;
+	Task t;
+
+
+	HashMap<String , Command> userCommands = new HashMap<String , Command>(); 
+	
+
+	@Override
+	public void run() {
+		t.doTask();
+		
+	}
+	
+	
+	
+	@Override
+	public void start() {
+		System.out.println("start");
+		setChanged();
+		notifyObservers();
+	}
+	
+	
+	@Override
+	public void setCommands(String commandName, Command command) {
+		userCommands.put(commandName, command);
+		System.out.println("setCommand" + commandName);
+	}
+	@Override
+	public Command getUserCommand() {
+		 System.out.println("getUserCommand");
+		  Command userCommand = userCommands.get("test");
+			return userCommand;
+	}
+	
+	@Override
+	public void displayMaze(Maze m) {
+		System.out.println("displayMaze");
+		
+	}
+	
+	@Override
+	public void displaySolution(Solution s) {
+		System.out.println("displaySolution");
+		
+	}
+
+
+
+}

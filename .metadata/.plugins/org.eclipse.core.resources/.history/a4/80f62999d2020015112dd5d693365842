@@ -1,0 +1,79 @@
+/**
+ * 
+ */
+package algorithms.search;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * @author HFL
+ *
+ */
+public class Solution  implements Serializable{
+
+	/**
+	 * 
+	 */
+	
+	private static final long serialVersionUID = 1L;
+	private List<State> list;
+
+	public List<State> getList() {
+		return list;
+	}
+
+
+	public void setList(List<State> list) {
+		this.list = list;
+	}
+
+	public void addToList(State st){
+		list.add(st);
+	}
+
+	public Solution() {
+		list = new ArrayList<State>();
+	
+	}
+	
+
+	public void displaySolution()
+	{
+		for(State s: list)
+		{
+			s.Print();
+		}
+		System.out.println();
+	}
+	@Override
+	public String toString()
+	{
+		StringBuilder str = new StringBuilder();
+		for(State s: list)
+		{
+			str.append(s.toString());
+		}
+		String s = str.toString();
+		return s;
+	}
+
+
+	public ArrayList<Integer> SolutionToArray()
+	{
+		ArrayList<Integer> sol = new ArrayList<Integer>();
+		for(State st: list)
+		{
+			String str = st.getState();
+			String [] temp = str.split(",");
+			sol.add(Integer.parseInt(temp[0]));
+			sol.add(Integer.parseInt(temp[1]));
+		}
+		
+		return sol;
+	}
+	
+
+	
+}

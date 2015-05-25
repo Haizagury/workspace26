@@ -1,0 +1,38 @@
+package algorithms.search;
+
+import static org.junit.Assert.*;
+
+import java.util.HashSet;
+import java.util.PriorityQueue;
+
+import org.junit.Test;
+
+public class AStarJUnitTest implements Heuristic {
+
+	@Test
+	public void test() throws Exception {
+		
+		Heuristic heuristic = new AStarJUnitTest();
+		
+	}		
+}
+//public void test() {
+//	System.out.println("The Maze:");
+//	MazeGenerator mg=new DFSMazeGenerator(); // my choice of algorithm
+//	Maze m = mg.generateMaze(10,10);
+//	m.print();
+//	System.out.println("\nSolution A* without diagonals");
+//	MazeSearch ams1 = new MazeSearch(m,false);
+//	AStar sol5 = new AStar();
+//	sol5.setH(new MazeManhattanDistance());
+//	Solution sol16 = sol5.search(ams1);
+//	sol16.displaySolution();
+//	System.out.println("\nSolution A* with diagonals");
+//	MazeSearch ams2 = new MazeSearch(m,true);
+//	AStar sol7 = new AStar();
+//	sol7.setH(new MazeAirDistance());
+//	Solution sol8 = sol7.search(ams2);
+//	sol8.displaySolution();
+//}
+//
+//}

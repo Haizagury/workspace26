@@ -1,0 +1,126 @@
+package presenter;
+
+import java.util.Observable;
+import java.util.Observer;
+
+import model.Model;
+import view.View;
+
+public class Presnter implements Observer {
+
+	View view;
+	Model model;
+	
+	public Presnter(View view, Model model) {
+		this.view = view;
+		this.model = model;
+		setUserCommand();
+	}
+	
+	public void setUserCommand(){
+		view.setCommands("generateMaze" ,new generateMazeCommand());
+		view.setCommands("displayMaze" ,new displayMazeCommand());
+		view.setCommands("solveMaze" ,new solveMazeCommand());
+		view.setCommands("displaySolution" ,new displaySolutionCommand());
+		view.setCommands("exit" ,new exitCommand());
+	}
+	
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("presenter.update");
+		String[] Name_params = ((String)arg).split(" ");
+		if (o == view){
+			if (Name_params[0].equals("Start")){
+				start();
+				Command command = view.getUserCommand();
+				command.doCommand(Name_params[1]);
+				
+				//command.doCommand("maze1");
+				//command.doCommand("maze2");
+				//command.doCommand("maze3");
+				//command.doCommand("maze4");
+				//command.doCommand("maze5");
+			}
+		}
+		else if (o == model){
+				if(arg == null)
+					return;
+				else{
+					
+					if (Name_params[0].equals("generateMazeComplete")){
+						view.display("Maze " + Name_params[1] + " is ready");
+						//view.displayMaze(model.getMaze(Name_params[1]));
+						model.solveMaze(Name_params[1]);
+						//model.solveMaze("maze1");
+					}
+					if(Name_params[0].equals("solveMazeCompleted")){
+						view.display("Solution for " + Name_params[1] + " ready");
+						//view.displaySolution(model.getSolution(Name_params[1]));
+					}
+				}
+		}
+					
+	}
+	
+	
+	private void start() {
+		model.start();
+		
+	}
+
+
+	public interface Command {
+			
+		void doCommand(String arg);
+	}
+	
+
+	public class generateMazeCommand implements Command {
+
+		@Override
+		public void doCommand(String arg) {
+			System.out.println("generateMazeCommand.doCommand");
+			model.generateMaze(arg/*, 0, 0*/);
+
+		}
+		
+	}
+	
+		public class displayMazeCommand implements Command {
+			@Override
+			public void doCommand(String arg) {
+				System.out.println("displayMazeCommand.doCommand");
+				if(model.getMaze(arg) != null)
+					view.displayMaze(model.getMaze(arg));
+				else
+				System.out.println("Maze not found");
+			}
+		}	
+     	public class solveMazeCommand implements Command {
+				@Override
+				public void doCommand(String arg) {
+					model.solveMaze(arg);
+				}	
+     	}			
+			
+     	public class displaySolutionCommand implements Command {
+    		@Override
+    		public void doCommand(String arg) {
+    			if(model.getSolution(arg) != null)
+    				view.displaySolution(model.getSolution(arg));
+    			else
+    			System.out.println("Solution not found");
+    			
+    		}
+     	}
+     	
+	     public class exitCommand implements Command {
+	    		@Override
+	    		public void doCommand(String arg) {
+	    			model.stop();
+	    			System.out.println("exit");
+	    			
+	    		}  
+	     }
+	
+}

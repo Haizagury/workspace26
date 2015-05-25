@@ -1,0 +1,42 @@
+package algorithms.search;
+
+import static org.junit.Assert.*;
+
+import java.util.HashSet;
+import java.util.PriorityQueue;
+
+import org.junit.Test;
+
+public class AStarJUnitTest implements Heuristic {
+
+	@Test
+	public void test() throws Exception {
+		
+		Heuristic heuristic = new AStarJUnitTest();
+		State s = null;
+		AStar a = new AStar(heuristic);
+		PriorityQueue<State> Start = a.openList;
+		
+		
+		
+		Start.isEmpty();
+		Start.size();
+		Start.add(s);
+		a.popOpenList();
+		a.getNumberOfNodesEvaluated();
+		
+		
+		HashSet<State> goal = a.closedList;
+		
+		
+		
+		
+	}
+
+	@Override
+	public int getHeuristics(State currState, State goal) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

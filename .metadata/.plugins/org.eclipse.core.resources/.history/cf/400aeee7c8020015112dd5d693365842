@@ -1,0 +1,94 @@
+package algorithms.search;
+
+import java.io.Serializable;
+
+public class State implements Comparable<State>,Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String state;    // the state represented by a string
+    private double cost;     // cost to reach this state
+   // private State cameFrom;  // the state we came from to this state
+    private String cameFrom;  // the state we came from to this state
+    private double weight;
+    
+    public State() {
+	
+	}
+
+    public double getWeight() {
+		return weight;
+	}
+
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
+
+	public String getCameFrom() {
+		return cameFrom;
+	}
+
+	public void setCameFrom(String cameFrom) {
+		this.cameFrom = cameFrom;
+	}
+
+	public State(String state){    // CTOR    
+        this.state = state;
+    }
+
+   @Override
+    public boolean equals(Object obj){ // we override Object's equals method
+	   //System.out.println("State.equals");		
+        return state.equals(((State)obj).state);
+    }
+
+	public String getState() {
+		//System.out.println("State.getState");
+		return state;
+	}
+
+	public void setState(String state) {
+		//System.out.println("State.setState");
+		this.state = state;
+	}
+
+	public double getCost() {
+		//System.out.println("State.getCost");
+		return cost;
+	}
+
+	public void setCost(double cost) {
+		//System.out.println("State.setCost");
+		this.cost = cost;
+	}
+
+	/*public State getCameFrom() {
+		System.out.println("State.getCameFrom");
+		return cameFrom;
+	}
+
+	public void setCameFrom(State cameFrom) {
+		System.out.println("State.setCameFrom");
+		this.cameFrom = cameFrom;
+	} */
+	
+	@Override
+	public int hashCode() {
+		//System.out.println("State.hashCode");
+		/*StringBuilder sb = new StringBuilder();
+		sb.append(getState() + getCost() + getCameFrom());
+		return sb.hashCode();*/
+		return state.hashCode();
+		
+	}
+
+	@Override
+	public int compareTo(State state) {
+		
+		return (int)(this.getCost() - state.getCost());
+	}
+	
+
+
+}

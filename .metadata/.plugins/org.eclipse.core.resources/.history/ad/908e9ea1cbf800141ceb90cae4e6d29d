@@ -1,0 +1,20 @@
+package view;
+
+import task.Task;
+public class CliTask implements Task {
+
+	private CliTask cli;
+	
+	@Override
+	public void doTask() {
+		cli = new CliTask();
+		
+	}
+	public CliTask getCli() {
+		return cli;
+	}
+	public void setCli(CliTask cli) {
+		this.cli = cli;
+	}
+
+}

@@ -1,0 +1,13 @@
+package model;
+
+import view.CLI;
+import view.Command;
+
+public class AsyncCLI extends CLI {
+
+	public AsyncCLI(Command[] comms) {
+		super(comms);
+		
+	}
+
+}

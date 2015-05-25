@@ -1,0 +1,51 @@
+package presenter;
+
+import java.util.Observable;
+import java.util.Observer;
+
+import model.Model;
+import view.View;
+
+public class Presenter implements Observer {
+
+	private Model model;
+	private View view;
+
+	public Presenter(View view, Model model) {
+		this.model = model;
+		this.view = view;
+		view.setCommands("test", new TestMVPCommand());
+		
+
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("presenter.update");
+
+		if (o == view) {
+			Command command = view.getUserCommand();
+			command.doCommand("");
+		} else if (o == model) {
+			view.displayMaze(model.getMaze());
+
+		}
+
+	}
+
+	public interface Command {
+		void doCommand(String arg);
+	}
+
+	public class TestMVPCommand implements Command {
+
+		@Override
+		public void doCommand(String arg) {
+			System.out.println("TestMVPCommand.doCommand");
+			model.generateMaze();
+
+		}
+
+	}
+
+}

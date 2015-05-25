@@ -1,0 +1,16 @@
+package algorithms.search;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class AStarJUnitTest {
+
+	@Test
+	public void test() throws Exception {
+		AStar a = new AStar(heuristic);
+		
+		
+	}
+
+}

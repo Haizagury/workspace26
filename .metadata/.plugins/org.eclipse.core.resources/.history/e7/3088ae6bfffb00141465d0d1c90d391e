@@ -1,0 +1,25 @@
+/**
+ * 
+ */
+package view;
+
+
+import presenter.Presnter.Command;
+import algorithms.mazeGenerator.Maze;
+import algorithms.search.Solution;
+
+
+/**
+ * @author HFL
+ *
+ */
+public interface View {
+	
+	void start();
+	void setCommands(String  commandName, Command command);
+	Command getUserCommand();
+	void displayMaze(Maze m);
+	void displaySolution(Solution s);
+	void display(String s);
+
+}

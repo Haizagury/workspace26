@@ -1,0 +1,319 @@
+package algorithms.demo;
+
+import java.util.ArrayList;
+
+import algorithms.mazeGenerator.Maze;
+import algorithms.search.Searchable;
+import algorithms.search.State;
+
+/**
+* The MazeSearch class implements Searchable, it takes a problem and makes it searchable.
+*<p> 
+* This is the object adapter class
+* @author  Gershfeld Itzik
+* @version 1.0
+* @since   2015-04-18 
+*/
+public class MazeSearch implements Searchable{
+	
+	private Maze maze;
+	private boolean diagonal;
+	
+	  /**
+	   * This method is used to create a new MazeSearch object.
+	   * This is the constructor of MazeSearch
+	   * @param maze <b>(Maze) </b>This is the first parameter to MazeSearch method
+	   * @param diagonal <b>(boolean) </b> This is the second parameter to MazeSearch method
+	   * @return Nothing.
+	   */
+	
+	public MazeSearch(Maze maze,boolean diagonal)
+	{
+		this.maze = maze;
+		for(int i=0;i<maze.getRows();i++)
+		{
+			for(int j=0;j<maze.getCols();j++)
+			{
+				maze.getCell(i, j).setVisited(false);
+			}
+		}
+		this.diagonal = diagonal;
+	}
+	
+	  /**
+	   * This method returns the start state of the Searchable problem.
+	   * @param Nothing.
+	   * @return State.
+	   */
+	
+	@Override
+	public State getStartState() 
+	{
+		State state = new State("0,0");
+		state.setCameFrom(null);
+		state.setCost(0);
+		return state;
+	}
+
+	  /**
+	   * This method returns the goal state of the Searchable problem.
+	   * @param Nothing.
+	   * @return State.
+	   */
+	
+	@Override
+	public State getGoalState() {
+		String st = new String();
+		st = ""+(maze.getRows()-1)+","+(maze.getCols()-1);
+		State state = new State(st);
+		return state;
+	}
+
+	  /**
+	   * This method is used to find all State's s neighbors.
+	   * The chosen neighbors depends on the diagonal value.
+	   * @param s <b>(State) </b>This is the parameter to getAllPossibleStates method
+	   * @return list <b>(ArrayList(State)) </b>.
+	   */
+	
+	@Override
+	public ArrayList<State> getAllPossibleStates(State s) 
+	{
+		ArrayList<State> list = new ArrayList<State>();
+		String [] arr = (s.getState().split(","));
+		int row =Integer.parseInt(arr[0]);
+		int col =Integer.parseInt(arr[1]);
+		int row1 = row;
+		int col1 = col;
+		String st1 = new String();
+		st1 = ""+row+","+col;
+		State state1 = new State(st1);
+		String st = new String();
+		State state = new State(st);
+		maze.getCell(row1, col1).setVisited(true);
+		if(!diagonal)
+		{
+			if(row+1<maze.getRows())
+			{
+				row1 = row + 1;
+				if(!maze.getCell(row,col).getHasBottomWall() && !maze.getCell(row1, col1).isVisited())
+				{
+					st = ""+row1+","+col1;
+					state.setCost(s.getCost()+10);
+					state.setState(st);
+					state.setCameFrom(st1);
+//					state.setCameFrom(state1);
+					list.add(state);
+				}
+			}
+			row1 = row;
+			col1 = col;
+			if(row-1>=0)
+			{
+				row1 = row - 1;
+				if(!maze.getCell(row-1,col).getHasBottomWall() && !maze.getCell(row1, col1).isVisited())
+				{
+					st = new String();
+					state = new State(st);
+					st = ""+row1+","+col1;
+					state.setCost(s.getCost()+10);
+					state.setState(st);
+					state.setCameFrom(st1);
+					list.add(state);
+				}
+			}
+			row1 = row;
+			col1 = col;
+			if(col+1<maze.getCols())
+			{
+				col1 = col + 1;
+				if(!maze.getCell(row,col).getHasLeftWall() && !maze.getCell(row1, col1).isVisited())
+				{
+					st = new String();
+					state = new State(st);
+					st = ""+row1+","+col1;
+					state.setState(st);
+					state.setCameFrom(st1);
+					state.setCost(s.getCost()+10);
+					list.add(state);
+				}
+			}
+			row1 = row;
+			col1 = col;
+			if(col-1>=0)
+			{
+				col1 = col - 1;
+				if(!maze.getCell(row,col-1).getHasLeftWall() && !maze.getCell(row1, col1).isVisited())
+				{
+					st = new String();
+					state = new State(st);
+					st = ""+row1+","+col1;
+					state.setState(st);
+					state.setCameFrom(st1);
+					state.setCost(s.getCost()+10);
+					list.add(state);
+				}
+			}
+		}
+		else
+		{
+			if(row+1<maze.getRows())
+			{
+				row1 = row + 1;
+				if(!maze.getCell(row,col).getHasBottomWall() && !maze.getCell(row1, col1).isVisited())
+				{
+					st = ""+row1+","+col1;
+					state.setCost(s.getCost()+10);
+					state.setState(st);
+					state.setCameFrom(st1);
+					list.add(state);
+				}
+			}
+			row1 = row;
+			col1 = col;
+			if(row-1>=0)
+			{
+				row1 = row - 1;
+				if(!maze.getCell(row-1,col).getHasBottomWall() && !maze.getCell(row1, col1).isVisited())
+				{
+					st = new String();
+					state = new State(st);
+					st = ""+row1+","+col1;
+					state.setCost(s.getCost()+10);
+					state.setState(st);
+					state.setCameFrom(st1);
+					list.add(state);
+				}
+			}
+			row1 = row;
+			col1 = col;
+			if(col+1<maze.getCols())
+			{
+				col1 = col + 1;
+				if(!maze.getCell(row,col).getHasLeftWall() && !maze.getCell(row1, col1).isVisited())
+				{
+					st = new String();
+					state = new State(st);
+					st = ""+row1+","+col1;
+					state.setState(st);
+					state.setCameFrom(st1);
+					state.setCost(s.getCost()+10);
+					list.add(state);
+				}
+			}
+			row1 = row;
+			col1 = col;
+			if(col-1>=0)
+			{
+				col1 = col - 1;
+				if(!maze.getCell(row,col-1).getHasLeftWall() && !maze.getCell(row1, col1).isVisited())
+				{
+					st = new String();
+					state = new State(st);
+					st = ""+row1+","+col1;
+					state.setState(st);
+					state.setCameFrom(st1);
+					state.setCost(s.getCost()+10);
+					list.add(state);
+				}
+			}
+			row1 = row;
+			col1 = col;
+			if(col-1>=0 && row-1>=0)
+			{
+				col1 = col - 1;
+				row1 = row - 1;
+				if((!maze.getCell(row-1,col).getHasBottomWall() && !maze.getCell(row-1,col-1).getHasLeftWall())||(!maze.getCell(row-1,col-1).getHasBottomWall() && !maze.getCell(row,col-1).getHasLeftWall()) && !maze.getCell(row1, col1).isVisited())
+				{
+					st = new String();
+					state = new State(st);
+					st = ""+row1+","+col1;
+					state.setState(st);
+					state.setCameFrom(st1);
+					state.setCost(s.getCost()+15);
+					list.add(state);
+				}
+			}
+			row1 = row;
+			col1 = col;
+			if(col+1<maze.getCols() && row-1>=0)
+			{
+				col1 = col + 1;
+				row1 = row - 1;
+				if((!maze.getCell(row-1,col).getHasBottomWall() && !maze.getCell(row-1,col).getHasLeftWall())||(!maze.getCell(row-1,col+1).getHasBottomWall() && !maze.getCell(row,col).getHasLeftWall()) && !maze.getCell(row1, col1).isVisited())
+				{
+					st = new String();
+					state = new State(st);
+					st = ""+row1+","+col1;
+					state.setState(st);
+					state.setCameFrom(st1);
+					state.setCost(s.getCost()+15);
+					list.add(state);
+				}
+			}
+			row1 = row;
+			col1 = col;
+			if(col+1<maze.getCols() && row+1<maze.getRows())
+			{
+				col1 = col + 1;
+				row1 = row + 1;
+				if((!maze.getCell(row,col+1).getHasBottomWall() && !maze.getCell(row,col).getHasLeftWall())||(!maze.getCell(row,col).getHasBottomWall() && !maze.getCell(row+1,col).getHasLeftWall()) && !maze.getCell(row1, col1).isVisited())
+				{
+					st = new String();
+					state = new State(st);
+					st = ""+row1+","+col1;
+					state.setState(st);
+					state.setCameFrom(st1);
+					state.setCost(s.getCost()+15);
+					list.add(state);
+				}
+			}
+			row1 = row;
+			col1 = col;
+			if(col-1>=0 && row+1<maze.getRows())
+			{
+				col1 = col - 1;
+				row1 = row + 1;
+				if((!maze.getCell(row,col).getHasBottomWall() && !maze.getCell(row+1,col-1).getHasLeftWall())||(!maze.getCell(row,col-1).getHasBottomWall() && !maze.getCell(row,col-1).getHasLeftWall()) && !maze.getCell(row1, col1).isVisited())
+				{
+					st = new String();
+					state = new State(st);
+					st = ""+row1+","+col1;
+					state.setState(st);
+					state.setCameFrom(st1);
+					state.setCost(s.getCost()+15);
+					list.add(state);
+				}
+			}
+		}
+		return list;
+
+	}
+
+	  /**
+	   * This method returns the value of the parameter diagonal.
+	   * @param Nothing.
+	   * @return boolean diagonal.
+	   */
+
+	public boolean isDiagonal() {
+		return diagonal;
+	}
+
+	  /**
+	   * This method sets the value of the parameter diagonal.
+	   * @param boolean diagonal.
+	   * @return Nothing.
+	   */
+
+	public void setDiagonal(boolean diagonal) {
+		this.diagonal = diagonal;
+	}
+
+	@Override
+	public double calcWeight(State start, State goal) {
+		// TODO Auto-generated method stub
+		return calcWeight(start, goal);
+	}
+
+}

@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+package algorithms.search;
+
+/**
+ * @author Livna Haim
+ * 
+ *
+ */
+public interface Heuristic {
+
+	public int getHeuristics(State currState, State goal);
+}

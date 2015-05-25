@@ -1,0 +1,93 @@
+package algorithms.search;
+
+import java.util.ArrayList;
+
+public class AStar extends CommonSearcher {
+
+	Heuristic heuristic;
+	
+	public AStar(Heuristic heuristic) {
+		this.heuristic = heuristic;
+	}
+	@Override
+	public Solution search(Searchable s) {		
+		
+		
+		s.getStartState().setWeight(0);
+	
+		s.getStartState().setCost(s.getStartState().getWeight() + heuristic.getHeuristics(s.getStartState(),s.getGoalState()));
+	
+		openList.add(s.getStartState());
+		while (!openList.isEmpty()){
+			State currState = popOpenList();
+						
+			closedList.add(currState);
+
+			if (currState.equals(s.getGoalState())){
+				//להחזיר את המסלול
+
+				Solution solution = new Solution();
+				backtracePath(s.getStartState(),currState,solution) ;
+				return solution;
+			}
+			else{
+
+				ArrayList<State> possibleStates = s.getAllPossibleStates(currState);
+				
+				for (State state : possibleStates){
+				
+					if ((!closedList.contains(state)) && (!openList.contains(state))){
+				
+						state.setWeight(s.calcWeight(currState, state));
+						state.setCost(state.getWeight() + heuristic.getHeuristics(state, s.getGoalState()));
+						state.setCameFrom(currState.getState());
+				
+						openList.add(state);
+					}
+					else if ((closedList.contains(state)) && (openList.contains(state))){
+
+						//לבדוק האם משפרים את ה COST
+						for (State st : openList){
+							if (st.getState().equals(state.getState())){
+								if (st.getCost() > state.getCost()){
+									state.setWeight(s.calcWeight(currState, state));
+									state.setCost(state.getWeight() + heuristic.getHeuristics(state, s.getGoalState()));
+									state.setCameFrom(currState.getState());
+
+									openList.remove(st);
+									openList.add(state);
+								}
+							}
+						}
+					}
+				}
+			}
+			
+		}
+		return null;
+
+	}
+	
+	private void backtracePath (State startState,State goalState,ArrayList<State> solution ){
+
+		
+		solution.add(goalState);
+		if (!startState.equals(goalState)){
+			State newGoalState = new State(goalState.getCameFrom());
+			for(State s : closedList){
+				if (s.getState().equals(goalState.getCameFrom())){
+					newGoalState.setCost(s.getCost());
+					newGoalState.setCameFrom(s.getCameFrom());
+				}
+			}
+
+			backtracePath(startState, newGoalState, solution);
+		}
+	}
+
+	public void setH(Heuristic h) 
+	{
+		this.h = h;
+	}
+
+}

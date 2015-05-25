@@ -1,0 +1,11 @@
+package view;
+
+import java.io.PrintStream;
+
+import algorithms.mazeGenerators.Maze;
+
+public interface MazeDisplayer {
+	
+	public void MazeDisplayer(Maze m , PrintStream out);
+
+}

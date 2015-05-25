@@ -1,0 +1,25 @@
+package view;
+
+import task.Task;
+
+public class MyViewCliTask implements Task{
+	
+	private View view;
+	private CLI cli;
+	
+
+	public View getView() {
+		return view;
+	}
+
+	public void setView(View view) {
+		this.view = view;
+	}
+
+	@Override
+	public void doTask() {
+	
+		
+	}
+
+}

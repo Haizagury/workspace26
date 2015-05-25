@@ -1,0 +1,23 @@
+/**
+ * 
+ */
+package model;
+
+import algorithms.mazeGenerator.Maze;
+import algorithms.search.Solution;
+
+
+/**
+ * @author HFL
+ *
+ */
+public interface Model {
+
+	void generateMaze(String mazeName);
+	Maze getMaze(String mazeName);
+	void solveMaze(String mazeName);
+	Solution getSolution(String mazeName);
+	void stop();
+	void upaloadSolutions();
+	void start();
+}

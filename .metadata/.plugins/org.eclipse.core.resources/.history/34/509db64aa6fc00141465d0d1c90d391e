@@ -1,0 +1,39 @@
+package view;
+
+import java.io.PrintStream;
+import java.util.Stack;
+
+import algorithms.search.Solution;
+import algorithms.search.State;
+
+public class MySolutionDisplayer implements SolutionDisplayer {
+	@Override
+	public void solutionDisplayer(Solution s, PrintStream out) {
+		if (s != null){
+			for(State st: s){
+				out.println(st.getState());
+			}
+		}
+		/*
+		Stack<State> sol = new Stack<>();
+		
+			Stack<State> newSol = new Stack<State>();
+			State state;
+			while(sol.size() != 1){
+				state = sol.pop();
+				out.print(state.getState());
+				newSol.add(state);
+			}
+			state = sol.pop();
+			out.println(state);
+			newSol.add(state);
+			while (newSol.isEmpty()==false){
+				sol.add(newSol.pop());
+			}
+		}*/
+		else{
+			out.println("not found Solution");
+		}
+	}
+
+}

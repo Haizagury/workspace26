@@ -1,0 +1,40 @@
+package algorithms.search;
+
+import algorithms.mazeGenerator.Cell;
+
+public class MazeAirHeuristic implements Heuristic {
+
+	@Override
+	public double getHeuristics(State currState, State goal) {
+
+		
+		String [] arr = (currState.getState().split(","));
+		double row =Integer.parseInt(arr[0]);
+		double col =Integer.parseInt(arr[1]);
+		arr = (goal.getState().split(","));
+		double rows =Integer.parseInt(arr[0]);
+		double cols =Integer.parseInt(arr[1]);
+		double byAir = Math.sqrt(Math.pow((rows-row),2)+Math.pow((cols-col),2));
+		double res =  Math.min(10*byAir,10*Math.abs(rows-row)+Math.abs(cols-col));
+		return res;
+
+		
+		
+		
+		
+		
+		
+//		Cell startCell = new Cell(currState);
+//		Cell goalCell = new Cell(goal);
+//		int rows = 0;
+//		int cols = 0;
+//		rows =  Math.abs(startCell.getRow() - goalCell.getRow());
+//		cols = Math.abs(startCell.getCol() - goalCell.getCol());
+//		
+//		rows = rows*rows;
+//		cols = cols*cols;
+//		
+//		return (int)(Math.sqrt(rows + cols) * 10);
+//	}
+	}
+}

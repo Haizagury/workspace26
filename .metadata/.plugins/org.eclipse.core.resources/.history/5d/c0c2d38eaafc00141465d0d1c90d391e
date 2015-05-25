@@ -1,0 +1,27 @@
+/**
+ * 
+ */
+package model;
+
+import java.io.Serializable;
+import java.util.HashMap;
+
+import algorithms.mazeGenerator.Maze;
+import algorithms.search.Solution;
+
+/**
+ * @author HFL
+ *
+ */
+public class SolutionsMap extends HashMap<Maze,Solution> implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public SolutionsMap() {
+		
+	}
+
+}

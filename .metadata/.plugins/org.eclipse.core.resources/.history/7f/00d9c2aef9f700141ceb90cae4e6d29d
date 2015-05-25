@@ -1,0 +1,60 @@
+package presenter;
+
+import java.util.Observable;
+import java.util.Observer;
+
+import model.Model;
+import view.Command;
+import view.View;
+
+public class Presenter implements Observer {
+
+	private Model model;
+	private View view;
+
+	public Presenter(View view, Model model) {
+		this.model = model;
+		this.view = view;
+		view.setCommands("test", new TestMVPCommand());
+		// 2) להעביר פקודות מזויפות
+
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		System.out.println("presenter.update");
+
+		if (o == view) {
+			Command command = view.getUserCommand();
+			command.doCommand("");
+		} else if (o == model) {
+			view.displayMaze(model.getMaze());
+
+		}
+
+	}
+
+//	public interface Command {
+//		void doCommand(String arg);
+//	}
+	
+	// 1) לרשת מפקודה ולקבל פקודה בבנאי
+
+	public class AsyncCommand implements Command {
+
+		public AsyncCommand(Command command) {
+			_command = command;
+		}
+		
+		@Override
+		public void doCommand(String arg) {
+			
+			update(, arg);
+			System.out.println("TestMVPCommand.doCommand");
+			model.generateMaze();
+
+		}
+
+	}
+
+}

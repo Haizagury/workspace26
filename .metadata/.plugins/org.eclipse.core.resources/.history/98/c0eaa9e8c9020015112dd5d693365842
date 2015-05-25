@@ -1,0 +1,33 @@
+package algorithms.search;
+
+import org.junit.Test;
+
+import algorithms.demo.MazeSearch;
+import algorithms.mazeGenerator.Cell;
+import algorithms.mazeGenerator.DFSMazeGenerator;
+import algorithms.mazeGenerator.Maze;
+import algorithms.mazeGenerator.MazeGenerator;
+
+public class AStarJUnitTest  {
+
+	@Test
+public void test(Cell arg1) {
+	System.out.println("The Maze:");
+	MazeGenerator mg=new DFSMazeGenerator(); // my choice of algorithm
+	Maze m =mg.generateMaze(10, 10,arg1 );
+	m.print();
+	System.out.println("\nSolution A* without diagonals");
+	MazeSearch ams1 = new MazeSearch(m,false);
+	AStar sol5 = new AStar(null);
+	sol5.setH(new MazaManhattanHeuristic());
+	Solution sol16 = sol5.search(ams1);
+	sol16.displaySolution();
+	System.out.println("\nSolution A* with diagonals");
+	MazeSearch ams2 = new MazeSearch(m,true);
+	AStar sol7 = new AStar(null);
+	sol7.setH(new MazeAirHeuristic());
+	Solution sol8 = sol7.search(ams2);
+	sol8.displaySolution();
+}
+
+}

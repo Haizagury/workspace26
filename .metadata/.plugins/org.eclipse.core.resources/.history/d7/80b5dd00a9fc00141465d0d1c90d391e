@@ -1,0 +1,78 @@
+package model;
+
+import java.io.Serializable;
+
+public class Properties implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String mazeGenerateType;
+	private String searchType;
+	private String heuristic;
+	private Integer rows;
+	private Integer cols;
+	private Integer xStartPoint;
+	private Integer yStartPoint;
+	
+	public String getMazeGenerateType() {
+		return mazeGenerateType;
+	}
+
+	public void setMazeGenerateType(String mazeGenerateType) {
+		this.mazeGenerateType = mazeGenerateType;
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getHeuristic() {
+		return heuristic;
+	}
+
+	public void setHeuristic(String heuristic) {
+		this.heuristic = heuristic;
+	}
+	
+	public Integer getRows() {
+		return rows;
+	}
+
+	public void setRows(Integer rows) {
+		this.rows = rows;
+	}
+
+	public Integer getCols() {
+		return cols;
+	}
+
+	public void setCols(Integer cols) {
+		this.cols = cols;
+	}
+
+	public Integer getXStartPoint() {
+		return xStartPoint;
+	}
+
+
+	public void setXStartPoint(Integer xStartPoint) {
+		this.xStartPoint = xStartPoint;
+	}
+
+	public Integer getYStartPoint() {
+		return yStartPoint;
+	}
+
+
+	public void setYStartPoint(Integer yStartPoint) {
+		this.yStartPoint = yStartPoint;
+	}
+
+	public Properties() { }
+}

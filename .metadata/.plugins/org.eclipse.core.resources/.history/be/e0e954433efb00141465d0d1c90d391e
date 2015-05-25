@@ -1,0 +1,72 @@
+package view;
+
+import java.io.BufferedReader;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Observable;
+import java.util.Queue;
+
+import presenter.Presenter.Command;
+import algorithms.mazeGenerators.Maze;
+import algorithms.search.Solution;
+
+
+public class MyView extends Observable implements View {
+
+	BufferedReader in;
+	PrintWriter out;
+	NewCli cli;
+	Queue<Command> CommandQueue;
+	
+
+	HashMap<String, Command> userCommands = new HashMap<String, Command>();
+
+	public MyView() {
+	
+		super();
+		
+		this.CommandQueue = CommandQueue;
+		this.in = in;
+		this.out = out;
+	}
+	
+
+
+	@Override
+	public void start() {
+		System.out.println("start");
+		setChanged();
+		notifyObservers();
+		Thread t = new Thread(new CLIRunnable(cli) );
+		t.start();
+	}
+
+	@Override
+	public void setCommands(String commandName, Command command) {
+		userCommands.put(commandName, command);
+		System.out.println("setCommand" + commandName);
+		cli = new NewCli( userCommands, this, in, out);
+	}
+
+	@Override
+	public Command getUserCommand() {
+		System.out.println("getUserCommand");
+		Command userCommand = userCommands.get("test");
+		
+		return userCommand;
+	}
+
+	@Override
+	public void displayMaze(Maze m) {
+		System.out.println("displayMaze");
+
+	}
+
+	@Override
+	public void displaySolution(Solution s) {
+		System.out.println("displaySolution");
+		
+	}
+
+	
+}

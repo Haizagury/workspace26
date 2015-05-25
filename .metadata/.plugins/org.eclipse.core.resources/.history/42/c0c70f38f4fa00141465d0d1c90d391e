@@ -1,0 +1,16 @@
+package view;
+
+import java.io.PrintStream;
+
+import algorithms.mazeGenerators.Maze;
+
+public class MyMazeDisplayer implements MazeDisplayer{
+
+	@Override
+	public void MazeDisplayer(Maze m, PrintStream out) {
+		
+		int cols ;
+		
+	}
+
+}

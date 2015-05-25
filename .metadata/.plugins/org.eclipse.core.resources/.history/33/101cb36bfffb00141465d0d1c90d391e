@@ -1,0 +1,68 @@
+package view;
+
+
+import java.util.HashMap;
+import java.util.Observable;
+
+import presenter.Presnter.Command;
+import algorithms.mazeGenerator.Maze;
+import algorithms.search.Solution;
+import algorithms.search.State;
+
+
+public class MyView extends Observable implements View{
+
+	HashMap<String, Command> userCommands = new HashMap<>();
+	
+	@Override
+	public void start() {
+		System.out.println("start");
+		setChanged();
+		notifyObservers("Start " + "maze1");
+	}
+
+	@Override
+	public void setCommands(String  commandName, Command command) {
+		userCommands.put(commandName, command);
+		System.out.println("setCommands" + commandName);
+
+	}
+
+	@Override
+	public Command getUserCommand() {
+		System.out.println("getUserCommand");
+		Command userCommand = userCommands.get("generateMaze");
+		return userCommand;
+	}
+
+	@Override
+	public void displayMaze(Maze m) {
+		m.print();
+		System.out.println("displayMaze");
+
+	}
+
+	@Override
+	public void displaySolution(Solution s) {
+		
+		System.out.println("displaySolution");
+		if (s != null){
+			for (State st : s)
+				System.out.println(st.getState());
+		}
+		else{
+				System.out.println("solution empty");
+			}
+		
+
+	}
+
+	@Override
+	public void display(String s) {
+		System.out.println(s);
+		
+	}
+
+
+
+}

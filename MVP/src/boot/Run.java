@@ -1,0 +1,21 @@
+package boot;
+
+
+
+import model.MyModel;
+import presenter.Presenter;
+import view.MyView;
+
+public class Run {
+
+	public static void main(String[] args) {
+		MyView myView = new MyView(null, null);
+		MyModel myModel = new MyModel();
+		Presenter presenter = new Presenter(myView , myModel);
+		myView.addObserver(presenter);
+		myModel.addObserver(presenter);	
+		myView.start();
+
+	}
+
+}

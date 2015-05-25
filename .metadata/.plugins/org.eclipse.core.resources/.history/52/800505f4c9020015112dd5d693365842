@@ -1,0 +1,6 @@
+package algorithms.mazeGenerator;
+
+public interface MazeGenerator {
+	Maze generateMaze(int rows, int cols/*, Cell start/*, Cell Goal*/);
+
+}

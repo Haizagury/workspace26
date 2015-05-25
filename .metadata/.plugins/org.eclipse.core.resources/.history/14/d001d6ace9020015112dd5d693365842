@@ -1,0 +1,95 @@
+package algorithms.search;
+
+import org.junit.Test;
+
+import algorithms.demo.MazeSearch;
+import algorithms.mazeGenerator.Cell;
+import algorithms.mazeGenerator.DFSMazeGenerator;
+import algorithms.mazeGenerator.Maze;
+import algorithms.mazeGenerator.MazeGenerator;
+import algorithms.mazeGenerator.RandomMazeGenerator;
+
+public class AStarJUnitTest  {
+
+	Heuristic h;
+	@Test
+public void test() {
+	System.out.println("The Maze:");
+	MazeGenerator mg=new DFSMazeGenerator(); 
+	Maze m =mg.generateMaze(10, 10,new Cell(13,8) );
+	m.print();
+	System.out.println("\nSolution A* without diagonals");
+	
+	MazeGenerator mg1 = new RandomMazeGenerator();
+	Maze m1 = mg1.generateMaze(5, 5, new Cell(7,4));
+	m1.print();
+	System.out.println("\nSolution A* without diagonals");
+	
+//	sol5.setH(new MazaManhattanHeuristic());
+//	Solution sol16 = sol5.search(ams1);
+//	sol16.displaySolution();
+//	System.out.println("\nSolution A* with diagonals");
+//	MazeSearch ams2 = new MazeSearch(m,true);
+//	MazeAirHeuristic hur = new MazeAirHeuristic();
+//	AStar sol7 = new AStar(hur);
+//	sol7.setH(new MazeAirHeuristic());
+//	Solution sol8 = sol7.search(ams2);
+//	sol8.displaySolution();
+//}
+
+}}
+
+//
+//testAStarSearch();
+//}
+//
+///**
+// * 
+// * <h2>testAStarSearch</h2>
+// *testAStarSearch
+// */
+//@Test
+//public void testAStarSearch() {
+//	MazeGenerator mg = new DFSMazeGenerator();
+//	Searchable ser;
+//	Searcher as;
+//	for(int i = 5 ; i < 80 ; i++) {
+//		for(int j = 0 ; j < 100 ; j++) {
+//			System.out.println("log dfs astar size="+i+" iteration="+j);
+//			Maze mz = mg.generateMaze(i, i);
+//			if(j==0)
+//				mz.print();
+//			ser = new MazeSearchable(mz);
+//			as = new AStarSearch(new HeuristicMazeManhattan(), ser);
+//			Solution sol = as.search(ser, false);
+//			if(sol == null) {
+//				fail("Error solving maze");
+//				System.exit(1);
+//			}
+//				
+//		}
+//	}
+//	mg = new RandomMazeGenerator();
+//	for(int i = 5 ; i < 80 ; i++) {
+//		for(int j = 0 ; j < 100 ; j++) {
+//			System.out.println("log random astar size="+i+" iteration="+j);
+//			Maze mz = mg.generateMaze(i, i);
+//			if(j == 0)
+//				mz.print();
+//			ser = new MazeSearchable(mz);
+//			as = new AStarSearch(new HeuristicMazeManhattan(), ser);
+//			Solution sol = as.search(ser, false);
+//			if(sol == null) {
+//				fail("Error solving maze");
+//				System.exit(1);
+//			}
+//		}
+//	}
+//}
+//
+//
+//
+
+
+
+

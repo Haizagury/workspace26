@@ -1,0 +1,21 @@
+package view;
+
+public class CLIRunnable implements Runnable  {
+	
+	NewCli cli;
+
+	public CLIRunnable(NewCli cli) {
+	
+		super();
+		this.cli = cli;
+	
+	}
+	
+	@Override
+	public void run() {
+		
+		cli.start();
+		
+	}
+
+}
